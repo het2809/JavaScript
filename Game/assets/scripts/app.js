@@ -19,7 +19,14 @@ function getMaxLifeValues() {
   }
   return parsedValue;
 }
-let chosenMaxLife = getMaxLifeValues();
+let chosenMaxLife;
+try {
+  chosenMaxLife = getMaxLifeValues();
+} catch (error) {
+  console.log(error);
+  chosenMaxLife = 100;
+  alert("You Entered Something Wrong , Default Value Of 100 Used");
+}
 let battleLog = [];
 let logEntry = {};
 let lastLoggedEntry;
