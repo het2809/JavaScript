@@ -18,7 +18,7 @@ const enteredValue = parseInt(
 let chosenMaxLife = parseInt(enteredValue);
 let battleLog = [];
 let logEntry = {};
-
+let lastLoggedEntry;
 if (isNaN(chosenMaxLife) || chosenMaxLife <= 0) {
   chosenMaxLife = 100;
 }
@@ -177,11 +177,11 @@ function healPlayerHandler() {
 }
 
 function printLogHandler() {
-  for (const logEntry of battleLog) {
-    for (const key in logEntry) {
-      console.log(`${key} : ${logEntry[key]}`);
-    }
-  }
+  // for (const logEntry of battleLog) {
+  //   for (const key in logEntry) {
+  //     console.log(`${key} : ${logEntry[key]}`);
+  //   }
+  // }
   // for (let i = 0; i < battleLog.length; i++) {
   //   console.log(battleLog[i]);
   // }
@@ -191,6 +191,18 @@ function printLogHandler() {
   // for(const key in logEntry){
   //   console.log(`${key} : ${logEntry[key]}`);
   // }
+  let i = 0;
+  for (const logEntry of battleLog) {
+    if ((!lastLoggedEntry && lastLoggedEntry !== 0) || lastLoggedEntry < i) {
+      console.log(`#${i}`);
+      for (const key in logEntry) {
+        console.log(`${key} : ${logEntry[key]}`);
+      }
+      lastLoggedEntry = i;
+      break;
+    }
+    i++;
+  }
 }
 
 attackBtn.addEventListener("click", attackHandler);
