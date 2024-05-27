@@ -17,6 +17,7 @@ const enteredValue = parseInt(
 
 let chosenMaxLife = parseInt(enteredValue);
 let battleLog = [];
+let logEntry = {};
 
 if (isNaN(chosenMaxLife) || chosenMaxLife <= 0) {
   chosenMaxLife = 100;
@@ -29,7 +30,7 @@ let hasBonusLife = true;
 adjustHealthBars(chosenMaxLife);
 
 function writeToLog(ev, val, monsterHealth, playerHealth) {
-  let logEntry = {
+  logEntry = {
     event: ev,
     value: val,
     finalMonsterHealth: monsterHealth,
@@ -176,7 +177,20 @@ function healPlayerHandler() {
 }
 
 function printLogHandler() {
-  console.log(battleLog);
+  for (const logEntry of battleLog) {
+    for (const key in logEntry) {
+      console.log(`${key} : ${logEntry[key]}`);
+    }
+  }
+  // for (let i = 0; i < battleLog.length; i++) {
+  //   console.log(battleLog[i]);
+  // }
+  // for (const logEntry of battleLog) {
+  //   console.log(logEntry);
+  // }
+  // for(const key in logEntry){
+  //   console.log(`${key} : ${logEntry[key]}`);
+  // }
 }
 
 attackBtn.addEventListener("click", attackHandler);
